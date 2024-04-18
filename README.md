@@ -1,6 +1,6 @@
 <h1 align="center">Doggy World
 
-  ![Logo](https://github.com/anacuende/Doggy_World/assets/113435331/0900822a-ab89-4c3c-9f69-3ffebf21f403)
+  ![Logo](https://github.com/anacuende/Doggy_World/assets/113435331/bff389c4-20d7-4133-9853-281b6ffe9eb8)
 
   <p align="center">
     <img src="https://img.shields.io/badge/STATUS-EN%20DESARROLLO-rgb(0,151,117)">
