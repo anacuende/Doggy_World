@@ -87,3 +87,40 @@ def register_user(request):
         return JsonResponse({'message': 'Usuario registrado correctamente'}, status=201)
     else:
         return JsonResponse({'error': 'Error interno de servidor'}, status=500)
+
+@csrf_exempt
+def update_user(request):
+    if request.method == 'PATCH':
+        token = request.headers.get('token')
+
+        if not token:
+            return JsonResponse({'error': 'Token no existente'}, status=404)
+        
+        try:
+            user = Usuario.objects.get(token=token)
+        except Usuario.DoesNotExist:
+            return JsonResponse({'error': 'Usuario no encontrado'}, status=404)
+
+        body_json = json.loads(request.body)        
+
+        if 'password' not in body_json or 'confirmPassword' not in body_json:
+            return JsonResponse({'error': 'Faltan campos de contraseña'}, status=400)
+
+        if body_json['password'] != body_json['confirmPassword']:
+            return JsonResponse({'error': 'Las contraseñas no coinciden'}, status=400)
+
+        if 'email' in body_json:
+            if not '@' in 'email':
+                return JsonResponse({'error': 'El email no es válido'}, status=400)
+            user.email = body_json['email']
+        if 'name' in body_json:
+            user.nombre = body_json['name']
+        if 'username' in body_json:
+            user.nombreUsuario = body_json['username']
+        user.contrasena = body_json['password']
+
+        user.save()
+
+        return JsonResponse({'message': 'Usuario actualizado correctamente'}, status=200)
+    else:
+        return JsonResponse({'error': 'Error interno de servidor'}, status=500)
