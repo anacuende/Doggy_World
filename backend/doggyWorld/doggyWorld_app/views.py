@@ -16,12 +16,9 @@ def session(request):
         password = body_json['password']
 
         try:
-            user = Usuario.objects.get(nombreUsuario = usernameEmail)
+            user = Usuario.objects.get(email = usernameEmail) if '@' in usernameEmail else Usuario.objects.get(nombreUsuario = usernameEmail)
         except Usuario.DoesNotExist:
-            try:
-                user = Usuario.objects.get(email = usernameEmail)
-            except Usuario.DoesNotExist:
-                return JsonResponse({'error': 'Usuario no encontrado'}, status=404)
+            return JsonResponse({'error': 'Usuario no encontrado'}, status=404)
             
         if hashlib.sha384(password.encode()).hexdigest() == user.contrasena:
             token = secrets.token_hex(16)
@@ -50,3 +47,4 @@ def session(request):
         return JsonResponse({'message': 'Sesión cerrada'}, status=200)
     else:
         return JsonResponse({'error': 'Error interno de servidor'}, status=500)
+
