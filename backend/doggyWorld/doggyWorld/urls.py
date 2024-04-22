@@ -20,4 +20,6 @@ from doggyWorld_app import views
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('api/doggyWorld/session', views.session),
+    path('api/doggyWorld/user/register', views.register_user),
+    path('api/doggyWorld/user', views.update_user),
 ]

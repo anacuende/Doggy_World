@@ -16,18 +16,15 @@ def session(request):
         password = body_json['password']
 
         try:
-            user = Usuario.objects.get(nombreUsuario = usernameEmail)
+            user = Usuario.objects.get(email = usernameEmail) if '@' in usernameEmail else Usuario.objects.get(nombreUsuario = usernameEmail)
         except Usuario.DoesNotExist:
-            try:
-                user = Usuario.objects.get(email = usernameEmail)
-            except Usuario.DoesNotExist:
-                return JsonResponse({'error': 'Usuario no encontrado'}, status=404)
+            return JsonResponse({'error': 'Usuario no encontrado'}, status=404)
             
         if hashlib.sha384(password.encode()).hexdigest() == user.contrasena:
             token = secrets.token_hex(16)
             user.token = token
             user.save()
-            return JsonResponse({'token': token}, status=201)
+            return JsonResponse({'message': 'Sesión iniciada'}, status=201)
         else:
             return JsonResponse({'error': 'Contraseña incorrecta'}, status=401)
     
@@ -48,5 +45,82 @@ def session(request):
         user.save()
 
         return JsonResponse({'message': 'Sesión cerrada'}, status=200)
+    else:
+        return JsonResponse({'error': 'Error interno de servidor'}, status=500)
+
+@csrf_exempt
+def register_user(request):
+    if request.method == 'POST':
+        body_json = json.loads(request.body)
+
+        campos_requeridos = ['name', 'username', 'email', 'password', 'confirm_password']
+        for campo in campos_requeridos:
+            if campo not in body_json:
+                return JsonResponse({'error': 'Falta el campo requerido: {campo}'}, status=404)
+
+        email = body_json['email']
+        if not '@' in email:
+            return JsonResponse({'error': 'El email no es válido'}, status=400)
+
+        if Usuario.objects.filter(email=email).exists():
+            return JsonResponse({'error': 'El email ya está registrado'}, status=400)
+
+        password = body_json['password']
+        confirm_password = body_json['confirm_password']
+        if password != confirm_password:
+            return JsonResponse({'error': 'Las contraseñas no coinciden'}, status=400)
+
+        token = secrets.token_hex(16)
+
+        try:
+            user = Usuario.objects.create(
+                nombre=body_json['name'],
+                nombreUsuario=body_json['username'],
+                email=body_json['email'],
+                contrasena=hashlib.sha384(password.encode()).hexdigest(),
+                token=token
+            )
+            user.save()
+        except Exception as e:
+            return JsonResponse({'error': 'No se pudo crear el usuario'}, status=500)
+
+        return JsonResponse({'message': 'Usuario registrado correctamente'}, status=201)
+    else:
+        return JsonResponse({'error': 'Error interno de servidor'}, status=500)
+
+@csrf_exempt
+def update_user(request):
+    if request.method == 'PATCH':
+        token = request.headers.get('token')
+
+        if not token:
+            return JsonResponse({'error': 'Token no existente'}, status=404)
+        
+        try:
+            user = Usuario.objects.get(token=token)
+        except Usuario.DoesNotExist:
+            return JsonResponse({'error': 'Usuario no encontrado'}, status=404)
+
+        body_json = json.loads(request.body)        
+
+        if 'password' not in body_json or 'confirmPassword' not in body_json:
+            return JsonResponse({'error': 'Faltan campos de contraseña'}, status=400)
+
+        if body_json['password'] != body_json['confirmPassword']:
+            return JsonResponse({'error': 'Las contraseñas no coinciden'}, status=400)
+
+        if 'email' in body_json:
+            if not '@' in 'email':
+                return JsonResponse({'error': 'El email no es válido'}, status=400)
+            user.email = body_json['email']
+        if 'name' in body_json:
+            user.nombre = body_json['name']
+        if 'username' in body_json:
+            user.nombreUsuario = body_json['username']
+        user.contrasena = body_json['password']
+
+        user.save()
+
+        return JsonResponse({'message': 'Usuario actualizado correctamente'}, status=200)
     else:
         return JsonResponse({'error': 'Error interno de servidor'}, status=500)
