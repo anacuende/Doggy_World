@@ -18,12 +18,12 @@ class Pedido(models.Model):
     numTarjeta = models.CharField(max_length=16)
     cadTarjeta = models.CharField(max_length=5)
     CVV = models.IntegerField()
-    precioTotal = models.DecimalField(max_digits=10, decimal_places=2)
+    precioTotal = models.FloatField()
     id_usuario = models.ForeignKey(Usuario, on_delete=models.CASCADE)
 
 class Producto(models.Model):
     nombre = models.CharField(max_length=300)
-    precio = models.DecimalField(max_digits=10, decimal_places=2)
+    precio = models.FloatField()
     descripcion = models.CharField(max_length=2000)
     imagen = models.URLField()
     categoria = models.IntegerField()
