@@ -2,7 +2,7 @@ from django.shortcuts import render
 from .models import Usuario, Pedido, Producto, DetallePedido, Carrito, ListaDeseos
 from django.views.decorators.csrf import csrf_exempt
 from django.http import JsonResponse
-import json, secrets, hashlib
+import json, secrets, hashlib, random
 
 @csrf_exempt
 def session(request):
@@ -124,3 +124,42 @@ def update_user(request):
         return JsonResponse({'message': 'Usuario actualizado correctamente'}, status=200)
     else:
         return JsonResponse({'error': 'Error interno de servidor'}, status=500)
+
+@csrf_exempt
+def products(request):
+    if request.method == "GET":
+        try:
+            token = request.headers.get("token")
+        except:
+            return JsonResponse({"error": "Token no proporcionado"}, status=400)
+        
+        if not Usuario.objects.filter(token=token).exists():
+            return JsonResponse({"error": "Token no encontrado"}, status=404)
+
+        categoria_id = request.GET.get("category")
+        cantidad_aleatoria = request.GET.get("random")
+
+        productos = Producto.objects.all()
+
+        if categoria_id:
+            cat_product = int(categoria_id)
+            productos = Producto.objects.filter(categoria=cat_product)
+        elif cantidad_aleatoria:
+            random_elements = int(cantidad_aleatoria)
+            productos = random.sample(list(Producto.objects.all()), random_elements)
+        else:
+            productos = Producto.objects.all()
+
+        json_data = []
+        for producto in productos:
+            json_data.append({
+                'id': producto.id,
+                'nombre': producto.nombre,
+                'descripcion': producto.descripcion,
+                'precio': float(producto.precio),
+                'imagen': producto.imagen
+            })
+
+        return JsonResponse(json_data, status=200, safe=False)
+    else:
+        return JsonResponse({"error": "Error interno de servidor"}, status=500)
