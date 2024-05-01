@@ -163,3 +163,32 @@ def products(request):
         return JsonResponse(json_data, status=200, safe=False)
     else:
         return JsonResponse({"error": "Error interno de servidor"}, status=500)
+
+@csrf_exempt
+def product_detail(request, productId):
+    if request.method == "GET":
+        try:
+            token = request.headers.get("token")
+        except:
+            return JsonResponse({"error": "Token no proporcionado"}, status=400)
+        
+        if not Usuario.objects.filter(token=token).exists():
+            return JsonResponse({"error": "Token no encontrado"}, status=404)
+
+        try:
+            producto = Producto.objects.get(id=productId)
+        except Producto.DoesNotExist:
+            return JsonResponse({"error": "Producto no encontrado"}, status=400)
+        
+        json_data = {
+            'id': producto.id,
+            'nombre': producto.nombre,
+            'descripcion': producto.descripcion,
+            'precio': float(producto.precio),
+            'imagen': producto.imagen
+        }
+        
+        return JsonResponse(json_data, status=200)
+    
+    else:
+        return JsonResponse({"error": "Error interno de servidor"}, status=500)
