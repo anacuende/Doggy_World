@@ -192,3 +192,36 @@ def product_detail(request, productId):
     
     else:
         return JsonResponse({"error": "Error interno de servidor"}, status=500)
+    
+@csrf_exempt
+def cart(request):
+    if request.method == "GET":
+        try:
+            token = request.headers.get("token")
+        except:
+            return JsonResponse({"error": "Token no proporcionado"}, status=400)
+
+        if not Usuario.objects.filter(token=token).exists():
+            return JsonResponse({"error": "Token no encontrado"}, status=404)
+
+        user = Usuario.objects.get(token=token)
+        cart_products = Carrito.objects.filter(id_usuario=user)
+
+        if cart_products:
+            products_data = []
+            for cart_product in cart_products:
+                product_data = {
+                    'id': cart_product.id_producto.id,
+                    'nombre': cart_product.id_producto.nombre,
+                    'precio': cart_product.id_producto.precio,
+                    'imagen': cart_product.id_producto.imagen,
+                    'categoria': cart_product.id_producto.categoria,
+                    'stock': cart_product.id_producto.stock,
+                    'cantidad': cart_product.cantidad
+                }
+                products_data.append(product_data)
+            return JsonResponse(products_data, status=200, safe=False)
+        else:
+            return JsonResponse({"message": "El carrito está vacío"}, status=204)
+    else:
+        return JsonResponse({"error": "Error interno de servidor"}, status=500)
