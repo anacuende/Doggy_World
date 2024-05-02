@@ -288,3 +288,34 @@ def cart(request):
 
     else:
         return JsonResponse({"error": "Error interno de servidor"}, status=500)
+    
+@csrf_exempt
+def wishlist(request):
+    if request.method == "GET":
+        try:
+            token = request.headers.get("token")
+        except:
+            return JsonResponse({"error": "Token no proporcionado"}, status=400)
+
+        if not Usuario.objects.filter(token=token).exists():
+            return JsonResponse({"error": "Token no encontrado"}, status=404)
+
+        user = Usuario.objects.get(token=token)
+        wishlist_products = ListaDeseos.objects.filter(id_usuario=user)
+
+        if wishlist_products:
+            products_data = []
+            for wishlist_product in wishlist_products:
+                product_data = {
+                    'id': wishlist_product.id_producto.id,
+                    'nombre': wishlist_product.id_producto.nombre,
+                    'precio': wishlist_product.id_producto.precio,
+                    'imagen': wishlist_product.id_producto.imagen,
+                    'descripcion': wishlist_product.id_producto.descripcion
+                }
+                products_data.append(product_data)
+            return JsonResponse(products_data, status=200, safe=False)
+        else:
+            return JsonResponse({"message": "La lista de deseos está vacía"}, status=204)
+    else:
+        return JsonResponse({"error": "Error interno de servidor"}, status=500)
