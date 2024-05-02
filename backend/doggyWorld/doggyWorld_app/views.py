@@ -260,6 +260,31 @@ def cart(request):
             carrito.save()
 
         return JsonResponse({"message": "Producto agregado al carrito de compras correctamente"}, status=201)
-    
+
+    elif request.method == "DELETE":
+        try:
+            token = request.headers.get("token")
+        except:
+            return JsonResponse({"error": "Token no proporcionado"}, status=400)
+
+        if not Usuario.objects.filter(token=token).exists():
+            return JsonResponse({"error": "Token no encontrado"}, status=404)
+
+        user = Usuario.objects.get(token=token)
+
+        producto_id = request.GET.get("productId")
+
+        if not producto_id:
+            return JsonResponse({"error": "ID del producto no proporcionado"}, status=400)
+
+        try:
+            carrito_producto = Carrito.objects.get(id_usuario=user, id_producto=producto_id)
+        except Carrito.DoesNotExist:
+            return JsonResponse({"error": "El producto no está en el carrito del usuario"}, status=400)
+
+        carrito_producto.delete()
+
+        return JsonResponse({"message": "Producto eliminado del carrito correctamente"}, status=200)
+
     else:
         return JsonResponse({"error": "Error interno de servidor"}, status=500)
