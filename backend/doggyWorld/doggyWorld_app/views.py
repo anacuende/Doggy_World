@@ -223,5 +223,43 @@ def cart(request):
             return JsonResponse(products_data, status=200, safe=False)
         else:
             return JsonResponse({"message": "El carrito está vacío"}, status=204)
+    
+    elif request.method == "POST":
+        try:
+            token = request.headers.get("token")
+        except:
+            return JsonResponse({"error": "Token no proporcionado"}, status=400)
+        
+        if not Usuario.objects.filter(token=token).exists():
+            return JsonResponse({"error": "Token no encontrado"}, status=404)
+
+        try:
+            body_json = json.loads(request.body)
+            producto_id = body_json.get("producto_id")
+            cantidad = body_json.get("cantidad")
+        except:
+            return JsonResponse({"error": "Datos no proporcionados o inválidos"}, status=400)
+
+        if not (producto_id and cantidad):
+            return JsonResponse({"error": "Datos faltantes"}, status=400)
+
+        if not Producto.objects.filter(id=producto_id).exists():
+            return JsonResponse({"error": "Producto no encontrado"}, status=404)
+
+        usuario = Usuario.objects.get(token=token)
+        producto = Producto.objects.get(id=producto_id)
+
+        carrito, created = Carrito.objects.get_or_create(
+            id_usuario=usuario,
+            id_producto=producto,
+            defaults={"cantidad": cantidad}
+        )
+
+        if not created:
+            carrito.cantidad += cantidad
+            carrito.save()
+
+        return JsonResponse({"message": "Producto agregado al carrito de compras correctamente"}, status=201)
+    
     else:
         return JsonResponse({"error": "Error interno de servidor"}, status=500)
