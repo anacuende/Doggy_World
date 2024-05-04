@@ -352,5 +352,30 @@ def wishlist(request):
         else:
             return JsonResponse({"message": "El producto ya está en la lista de deseos"}, status=400)
 
+    elif request.method == "DELETE":
+        try:
+            token = request.headers.get("token")
+        except:
+            return JsonResponse({"error": "Token no proporcionado"}, status=400)
+        
+        if not Usuario.objects.filter(token=token).exists():
+            return JsonResponse({"error": "Token no encontrado"}, status=404)
+
+        usuario = Usuario.objects.get(token=token)
+
+        producto_id = request.GET.get("productId")
+
+        if not producto_id:
+            return JsonResponse({"error": "ID del producto no proporcionado"}, status=400)
+
+        try:
+            lista_deseos_producto = ListaDeseos.objects.get(id_usuario=usuario, id_producto=producto_id)
+        except ListaDeseos.DoesNotExist:
+            return JsonResponse({"error": "El producto no está en la lista de deseos del usuario"}, status=400)
+
+        lista_deseos_producto.delete()
+
+        return JsonResponse({"message": "Producto eliminado de la lista de deseos correctamente"}, status=200)
+    
     else:
         return JsonResponse({"error": "Error interno de servidor"}, status=500)
