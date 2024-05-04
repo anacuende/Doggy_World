@@ -379,3 +379,37 @@ def wishlist(request):
     
     else:
         return JsonResponse({"error": "Error interno de servidor"}, status=500)
+
+@csrf_exempt
+def pedidos(request):
+    if request.method == "GET":
+        try:
+            token = request.headers.get("token")
+        except:
+            return JsonResponse({"error": "Token no proporcionado"}, status=400)
+        
+        if not Usuario.objects.filter(token=token).exists():
+            return JsonResponse({"error": "Token no encontrado"}, status=404)
+
+        pedidos = Pedido.objects.all()
+
+        if pedidos:
+            pedidos_data = []
+            for pedido in pedidos:
+                pedidos_data.append({
+                    'id': pedido.id,
+                    'fecha': pedido.fecha,
+                    'direccion': pedido.direccion,
+                    'localidad': pedido.localidad,
+                    'pais': pedido.pais,
+                    'titularTarjeta': pedido.titularTarjeta,
+                    'numTarjeta': pedido.numTarjeta,
+                    'cadTarjeta': pedido.cadTarjeta,
+                    'CVV': pedido.CVV,
+                    'precioTotal': pedido.precioTotal,
+                })
+            return JsonResponse(pedidos_data, status=200, safe=False)
+        else:
+            return JsonResponse({"message": "No hay pedidos disponibles"}, status=204)
+    else:
+        return JsonResponse({"error": "Error interno de servidor"}, status=500)

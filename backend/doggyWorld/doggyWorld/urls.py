@@ -26,4 +26,5 @@ urlpatterns = [
     path('api/doggyWorld/products/<int:productId>', views.product_detail),
     path('api/doggyWorld/cart', views.cart),
     path('api/doggyWorld/wishlist', views.wishlist),
+    path('api/doggyWorld/pedidos', views.pedidos),
 ]
