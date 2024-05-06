@@ -2,7 +2,8 @@ from django.shortcuts import render
 from .models import Usuario, Pedido, Producto, DetallePedido, Carrito, ListaDeseos
 from django.views.decorators.csrf import csrf_exempt
 from django.http import JsonResponse
-import json, secrets, hashlib, random
+from django.db import transaction
+import json, secrets, hashlib, random, datetime
 
 @csrf_exempt
 def session(request):
@@ -411,5 +412,74 @@ def pedidos(request):
             return JsonResponse(pedidos_data, status=200, safe=False)
         else:
             return JsonResponse({"message": "No hay pedidos disponibles"}, status=204)
+    
+    elif request.method == "POST":
+        try:
+            token = request.headers.get("token")
+        except:
+            return JsonResponse({"error": "Token no proporcionado"}, status=400)
+        
+        if not Usuario.objects.filter(token=token).exists():
+            return JsonResponse({"error": "Token no encontrado"}, status=404)
+
+        try:
+            body_json = json.loads(request.body)
+            direccion = body_json.get("direccion")
+            localidad = body_json.get("localidad")
+            pais = body_json.get("pais")
+            titularTarjeta = body_json.get("titularTarjeta")
+            numTarjeta = body_json.get("numTarjeta")
+            cadTarjeta = body_json.get("cadTarjeta")
+            CVV = body_json.get("CVV")
+        except:
+            return JsonResponse({"error": "Datos no proporcionados o inválidos"}, status=400)
+
+        user = Usuario.objects.get(token=token)
+
+        productos_en_carrito = Carrito.objects.filter(id_usuario=user)
+        if not productos_en_carrito:
+            return JsonResponse({"error": "No hay productos en el carrito"}, status=400)
+
+        try:
+            precio_total = sum(producto_carrito.id_producto.precio * producto_carrito.cantidad for producto_carrito in productos_en_carrito)
+
+            pedido = Pedido.objects.create(
+                fecha = datetime.date.today(),
+                direccion = direccion,
+                localidad = localidad,
+                pais = pais,
+                titularTarjeta = titularTarjeta,
+                numTarjeta = numTarjeta,
+                cadTarjeta = cadTarjeta,
+                CVV = CVV,
+                precioTotal = precio_total,
+                id_usuario = user
+            )
+
+            pedido.save()
+
+            for producto_carrito in productos_en_carrito:
+                producto = producto_carrito.id_producto
+    
+                if producto.stock <= producto_carrito.cantidad:
+                    return JsonResponse({"error": "No hay suficiente stock"}, status=404)
+                producto.stock -= producto_carrito.cantidad
+
+                producto.save()
+                DetallePedido.objects.create(
+                    id_pedido=pedido,
+                    id_producto=producto,
+                    cantidadProducto=producto_carrito.cantidad
+                )
+
+            pedido.precioTotal = precio_total
+            
+            productos_en_carrito.delete()
+                
+        except Exception as e:
+            return JsonResponse({"error": f"Error al procesar el pedido: {str(e)}"}, status=500)
+
+        return JsonResponse({"message": "Pedido realizado correctamente"}, status=201)
+
     else:
         return JsonResponse({"error": "Error interno de servidor"}, status=500)
