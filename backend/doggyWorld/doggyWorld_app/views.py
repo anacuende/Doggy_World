@@ -477,9 +477,36 @@ def pedidos(request):
             productos_en_carrito.delete()
                 
         except Exception as e:
-            return JsonResponse({"error": f"Error al procesar el pedido: {str(e)}"}, status=500)
+            return JsonResponse({"error": "Error al procesar el pedido"}, status=500)
 
         return JsonResponse({"message": "Pedido realizado correctamente"}, status=201)
+    
+    elif request.method == "DELETE":
+        try:
+            token = request.headers.get("token")
+        except:
+            return JsonResponse({"error": "Token no proporcionado"}, status=400)
+        
+        if not Usuario.objects.filter(token=token).exists():
+            return JsonResponse({"error": "Token no encontrado"}, status=404)
 
+        try:
+            pedido_id = request.GET.get("pedidoId")
+            pedido = Pedido.objects.get(id=pedido_id)
+        except Pedido.DoesNotExist:
+            return JsonResponse({"error": "Pedido no encontrado"}, status=404)
+
+        try:
+            detalles_pedido = pedido.detallepedido_set.all()
+            for detalle in detalles_pedido:
+                producto = detalle.id_producto
+                producto.stock += detalle.cantidadProducto
+                producto.save()
+
+            pedido.delete()
+        except Exception as e:
+            return JsonResponse({"error": "Error al cancelar el pedido"}, status=500)
+
+        return JsonResponse({"message": "Pedido cancelado correctamente"}, status=200)
     else:
         return JsonResponse({"error": "Error interno de servidor"}, status=500)
