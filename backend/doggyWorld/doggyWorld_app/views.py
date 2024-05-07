@@ -51,7 +51,27 @@ def session(request):
 
 @csrf_exempt
 def register_user(request):
-    if request.method == 'POST':
+    if request.method == 'GET':
+        try:
+            token = request.headers.get("token")
+        except:
+            return JsonResponse({"error": "Token no proporcionado"}, status=400)
+        
+        if not Usuario.objects.filter(token=token).exists():
+            return JsonResponse({"error": "Token no encontrado"}, status=404)
+
+        user = Usuario.objects.get(token=token)
+
+        user_info = {
+            'id': user.id,
+            'name': user.nombre,
+            'username': user.nombreUsuario,
+            'email': user.email
+        }
+
+        return JsonResponse(user_info, status=200)
+
+    elif request.method == 'POST':
         body_json = json.loads(request.body)
 
         campos_requeridos = ['name', 'username', 'email', 'password', 'confirm_password']
