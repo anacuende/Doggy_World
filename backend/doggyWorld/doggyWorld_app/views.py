@@ -130,6 +130,8 @@ def update_user(request):
         if body_json['password'] != body_json['confirmPassword']:
             return JsonResponse({'error': 'Las contraseñas no coinciden'}, status=400)
 
+        hashed_password = hashlib.sha384(body_json['password'].encode()).hexdigest()
+
         if 'email' in body_json:
             if not '@' in 'email':
                 return JsonResponse({'error': 'El email no es válido'}, status=400)
@@ -138,7 +140,7 @@ def update_user(request):
             user.nombre = body_json['name']
         if 'username' in body_json:
             user.nombreUsuario = body_json['username']
-        user.contrasena = body_json['password']
+        user.contrasena = hashed_password
 
         user.save()
 
