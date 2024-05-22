@@ -3,49 +3,77 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:gravity="center"
     android:orientation="vertical"
-    android:padding="16dp"
-    android:gravity="center">
+    android:padding="16dp">
+
+    <TextView
+        android:id="@+id/TextView1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Bienvenido/a"
+        android:textSize="24sp"
+        android:textStyle="bold"
+        android:layout_gravity="center"
+        tools:ignore="HardcodedText"/>
 
     <ImageView
         android:id="@+id/logoImageView"
-        android:layout_width="200dp"
-        android:layout_height="200dp"
-        android:src="@drawable/logo_doggy_world"
+        android:layout_width="180dp"
+        android:layout_height="180dp"
         android:layout_gravity="center"
-        tools:ignore="ContentDescription" />
+        android:src="@drawable/logo_doggy_world"
+        tools:ignore="ContentDescription"/>
 
+    <!-- Label y campo para nombre de usuario o email -->
+    <TextView
+        android:id="@+id/usernameEmailLabel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:text="Nombre de usuario o email"
+        android:layout_gravity="start"
+        tools:ignore="HardcodedText"/>
     <EditText
         android:id="@+id/usernameEmailEditText"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="Username or Email"
         android:inputType="textEmailAddress"
-        android:layout_marginTop="16dp"
-        tools:ignore="Autofill,HardcodedText" />
+        android:hint="Ingrese su nombre de usuario o email"
+        tools:ignore="Autofill,HardcodedText"/>
 
+    <!-- Label y campo para contraseña -->
+    <TextView
+        android:id="@+id/passwordLabel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:text="Contraseña"
+        android:layout_gravity="start"
+        tools:ignore="HardcodedText"/>
     <EditText
         android:id="@+id/passwordEditText"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="Password"
         android:inputType="textPassword"
-        android:layout_marginTop="16dp"
-        tools:ignore="Autofill,HardcodedText" />
+        android:hint="Ingrese su contraseña"
+        tools:ignore="Autofill,HardcodedText"/>
 
-    <Button
+    <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/loginButton"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Login"
-        android:layout_marginTop="16dp"
-        tools:ignore="HardcodedText" />
+        android:layout_marginTop="8dp"
+        android:background="@drawable/button_fill_shape"
+        android:text="Iniciar sesión"
+        tools:ignore="HardcodedText"/>
 
-    <Button
+    <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/registerButton"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Register"
         android:layout_marginTop="8dp"
-        tools:ignore="HardcodedText" />
+        android:background="@drawable/button_transparent_shape"
+        android:text="Registrarse"
+        tools:ignore="HardcodedText"/>
 </LinearLayout>
