@@ -25,7 +25,7 @@ def session(request):
             token = secrets.token_hex(16)
             user.token = token
             user.save()
-            return JsonResponse({'message': 'Sesión iniciada'}, status=201)
+            return JsonResponse({'message': 'Sesión iniciada', 'token': token}, status=201)
         else:
             return JsonResponse({'error': 'Contraseña incorrecta'}, status=401)
     
@@ -105,7 +105,7 @@ def register_user(request):
         except Exception as e:
             return JsonResponse({'error': 'No se pudo crear el usuario'}, status=500)
 
-        return JsonResponse({'message': 'Usuario registrado correctamente'}, status=201)
+        return JsonResponse({'message': 'Usuario registrado correctamente', 'token': token}, status=201)
     else:
         return JsonResponse({'error': 'Error interno de servidor'}, status=500)
 
