@@ -12,13 +12,13 @@
 Este proyecto se encuentra actualmente en construcción. A lo largo de las próximas semanas se continuará con su desarrollo.
 
 ## :round_pushpin: Índice
-* [¿Qué es Doggy World?](#¿Qué-es-Doggy-World?)
-* [¿Por qué esta aplicación?](#¿Por-qué-esta-aplicación?)
-* [Características](#Características)
-* [Acceso al proyecto](#Acceso-al-proyecto)
-* [Abrir y ejecutar el proyecto](#Abrir-y-ejecutar-el-proyecto)
-* [Tecnologías](#Tecnologías)
-* [Contribuyentes](#Contribuyentes)
+* ¿Qué es Doggy World?
+* ¿Por qué esta aplicación?
+* Características
+* Acceso al proyecto
+* Abrir y ejecutar el proyecto
+* Tecnologías
+* Contribuyentes
  
 ## :dog: ¿Qué es Doggy World?
 
@@ -40,19 +40,50 @@ Muchas veces la búsqueda de ciertos productos para nuestro mejor amigo se hace 
 
 ## :calling: Acceso al proyecto
 
+Para ejecutar y visualizar el código del proyecto se deberá disponer de la última versión de (se adjuntan links de descarga):
 
+:heavy_check_mark: Android Studio (https://developer.android.com/studio?hl=es-419)
+
+:heavy_check_mark: Django (https://www.djangoproject.com/download/)
+
+:heavy_check_mark: Python (https://www.python.org/downloads/)
+
+:heavy_check_mark: Visual Studio Code (https://code.visualstudio.com/download)
 
 ## :hammer_and_wrench: Abrir y ejecutar el proyecto
 
+:one: Descargar este repositorio en tu dispositivo. En la parte superior, pulsando el botón <b><> Code</b> se desplegará una ventana. En la parte inferior de esta se seleccionará la opción <b>Descargar ZIP</b>
 
+:two: Una vez descargado, acceda a dicho ZIP en su explorador de archivos y descomprima la carpeta en la ruta que desee.
+
+:three: Abra una terminal en la ruta
+
+> ..\Doggy_World-main\Doggy_World-main\backend\doggyWorld
+
+y ejecute el comando
+
+> python3 manage.py runserver
+
+Ya está el servidor activo.
+
+:four: Ahora inciemos el cliente, abra Android Studio y luego abra el proyecto dentro de este mismo IDE. La carpeta que deberá seleccionar para abrir el proyecto es
+
+> ..\Doggy_World-main\Doggy_World-main\frontend
+
+> [!IMPORTANT]
+> Para una correcta visualización de la aplicación es preferible usar el emulador **Nexus S** (4.0") de 480x800 hdpi con la versión **Pie** (API Level 28) para x86
+
+:five: Una vez se hayan completado todos los pasos anteriores y se haya creado el emulador se pulsará el botón de **Play** para iniciar la aplicación.
+
+<h3>Todo listo, ¡ya puedes usar Doggy World!</h3>
 
 ## :desktop_computer: Tecnologías
 
-- Front-end: Java (Android)
+:heavy_check_mark: Front-end: Java (Android)
 
-- Back-end: Python (Django)
+:heavy_check_mark: Back-end: Python (Django)
 
-- Base de datos: SQLite
+:heavy_check_mark: Base de datos: SQLite
 
 ## :bust_in_silhouette: Contribuyentes
 
