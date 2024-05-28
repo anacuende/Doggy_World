@@ -9,7 +9,7 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 import com.bumptech.glide.Glide;
-
+import android.content.Intent;
 import java.text.DecimalFormat;
 import java.util.List;
 
@@ -38,6 +38,15 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ProductV
         holder.nombre.setText(product.getNombre());
         holder.precio.setText(String.valueOf(decimalFormat.format(product.getPrecio())+" €"));
         Glide.with(context).load(product.getImagen()).into(holder.imagen);
+
+        holder.itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(context, ProductDetailActivity.class);
+                intent.putExtra("productId", product.getId());
+                context.startActivity(intent);
+            }
+        });
     }
 
     @Override
