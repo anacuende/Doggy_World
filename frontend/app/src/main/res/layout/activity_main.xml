@@ -4,20 +4,66 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <!-- Contenedor principal -->
-    <FrameLayout
-        android:id="@+id/frame"
+    <!-- Cabecera -->
+    <LinearLayout
+        android:id="@+id/header"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:padding="16dp"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:background="@color/white">
+
+        <!-- Primer botón del bottom navigation (moved to header) -->
+        <ImageButton
+            android:id="@+id/firstButton"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:src="@drawable/icono_doggy_world"
+            android:background="?attr/selectableItemBackgroundBorderless"
+            android:layout_marginEnd="8dp"/>
+
+        <!-- Imagen rectangular -->
+        <ImageView
+            android:id="@+id/headerImage"
+            android:layout_width="0dp"
+            android:layout_height="40dp"
+            android:layout_weight="1"
+            android:src="@drawable/banner_doggy_world"
+            android:scaleType="centerCrop"
+            android:layout_marginEnd="8dp"/>
+
+        <!-- Botón para el carrito -->
+        <ImageButton
+            android:id="@+id/cartButton"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:src="@drawable/icono_doggy_world"
+            android:background="?attr/selectableItemBackgroundBorderless"
+            android:layout_marginEnd="8dp"/>
+
+        <!-- Botón para el perfil -->
+        <ImageButton
+            android:id="@+id/profileButton"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:src="@drawable/icono_doggy_world"
+            android:background="?attr/selectableItemBackgroundBorderless"/>
+    </LinearLayout>
+
+    <!-- RecyclerView para mostrar los productos -->
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recyclerView"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         app:layout_constraintBottom_toTopOf="@id/bottomNavigation"
-        app:layout_constraintTop_toTopOf="parent">
-
-        <!-- RecyclerView para mostrar los productos -->
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/recyclerView"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"/>
-    </FrameLayout>
+        app:layout_constraintTop_toBottomOf="@id/header"
+        android:background="@color/white"
+        android:layout_marginTop="8dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginEnd="8dp"/>
 
     <!-- Bottom Navigation View -->
     <com.etebarian.meowbottomnavigation.MeowBottomNavigation
