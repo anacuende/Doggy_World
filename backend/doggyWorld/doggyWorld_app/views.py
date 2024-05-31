@@ -228,8 +228,11 @@ def cart(request):
             return JsonResponse({"error": "Token no encontrado"}, status=404)
 
         user = Usuario.objects.get(token=token)
-        cart_products = Carrito.objects.filter(id_usuario=user)
-
+        try:
+            cart_products = Carrito.objects.filter(id_usuario=user)
+        except Carrito.DoesNotExist:
+            return JsonResponse({"message": "El carrito está vacío"}, status=204)
+        
         if cart_products:
             products_data = []
             for cart_product in cart_products:
@@ -279,7 +282,7 @@ def cart(request):
         )
 
         if not created:
-            carrito.cantidad += cantidad
+            carrito.cantidad = cantidad
             carrito.save()
 
         return JsonResponse({"message": "Producto agregado al carrito de compras correctamente"}, status=201)
