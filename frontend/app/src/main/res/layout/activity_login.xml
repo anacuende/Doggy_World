@@ -66,6 +66,7 @@
         android:layout_marginTop="8dp"
         android:background="@drawable/button_fill_shape"
         android:text="Iniciar sesión"
+        android:textColor="@color/white"
         tools:ignore="HardcodedText"/>
 
     <androidx.appcompat.widget.AppCompatButton

@@ -64,11 +64,11 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void seleccionarCategoria() {
-        bottomNavigation.add(new MeowBottomNavigation.Model(0, R.drawable.icono_doggy_world));
-        bottomNavigation.add(new MeowBottomNavigation.Model(1, R.drawable.icono_doggy_world));
-        bottomNavigation.add(new MeowBottomNavigation.Model(2, R.drawable.icono_doggy_world));
-        bottomNavigation.add(new MeowBottomNavigation.Model(3, R.drawable.icono_doggy_world));
-        bottomNavigation.add(new MeowBottomNavigation.Model(4, R.drawable.icono_doggy_world));
+        bottomNavigation.add(new MeowBottomNavigation.Model(0, R.drawable.cat_alimentacion));
+        bottomNavigation.add(new MeowBottomNavigation.Model(1, R.drawable.cat_juguetes));
+        bottomNavigation.add(new MeowBottomNavigation.Model(2, R.drawable.cat_paseo));
+        bottomNavigation.add(new MeowBottomNavigation.Model(3, R.drawable.cat_higiene));
+        bottomNavigation.add(new MeowBottomNavigation.Model(4, R.drawable.cat_hogar));
 
         bottomNavigation.show(-1, true);
         bottomNavigation.setOnClickMenuListener(new Function1<MeowBottomNavigation.Model, Unit>() {

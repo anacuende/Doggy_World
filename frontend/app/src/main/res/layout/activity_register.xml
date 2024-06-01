@@ -138,6 +138,7 @@
         android:layout_marginTop="8dp"
         android:background="@drawable/button_fill_shape"
         android:text="Registrarse"
+        android:textColor="@color/white"
         android:textSize="14sp"
         tools:ignore="HardcodedText"/>
 
