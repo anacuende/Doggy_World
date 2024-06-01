@@ -184,6 +184,8 @@ public class CartActivity extends AppCompatActivity {
                     @Override
                     public void onResponse(JSONObject response) {
                         Toast.makeText(CartActivity.this, "Pedido realizado correctamente", Toast.LENGTH_SHORT).show();
+                        Intent intent = new Intent(CartActivity.this, MainActivity.class);
+                        startActivity(intent);
                     }
                 },
                 new Response.ErrorListener() {
