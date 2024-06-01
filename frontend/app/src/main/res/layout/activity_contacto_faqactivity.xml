@@ -1,0 +1,134 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="16dp"
+    tools:context=".ProfileActivity">
+
+    <ImageView
+        android:id="@+id/headerImage"
+        android:layout_width="280dp"
+        android:layout_height="75dp"
+        android:layout_gravity="center"
+        android:scaleType="centerCrop"
+        android:src="@drawable/banner_doggy_world"/>
+
+    <TextView
+        android:id="@+id/textPerfilUsuario"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Contacto y FAQ"
+        android:textSize="18sp"
+        android:layout_gravity="center"/>
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:paddingTop="16dp">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/textPreguntasFrecuentes"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Preguntas Frecuentes"
+                android:textSize="22sp"
+                android:textStyle="bold"
+                android:layout_marginBottom="8dp"/>
+
+            <TextView
+                android:id="@+id/question1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="¿Cómo realizo un pedido?"
+                android:textSize="18sp"
+                android:textStyle="italic"
+                android:layout_marginBottom="4dp"/>
+
+            <TextView
+                android:id="@+id/answer1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Para realizar un pedido, simplemente añade los productos a tu carrito y rellena los campos requeridos con tus datos para completar el proceso de compra."
+                android:layout_marginBottom="8dp"/>
+
+            <TextView
+                android:id="@+id/question2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="¿Puedo cancelar un pedido?"
+                android:textSize="18sp"
+                android:textStyle="italic"
+                android:layout_marginBottom="4dp"/>
+
+            <TextView
+                android:id="@+id/answer2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Sí, tan solo tienes que acceder a tu perfil y seleccionar la opción Pedidos. Busca el pedido que deseas cancelar y selecciona la opción Cancelar."
+                android:layout_marginBottom="8dp"/>
+
+            <TextView
+                android:id="@+id/question3"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="¿Cuanto tarda en llegar mi pedido?"
+                android:textSize="18sp"
+                android:textStyle="italic"
+                android:layout_marginBottom="4dp"/>
+
+            <TextView
+                android:id="@+id/answer3"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Una ver realizado con éxito el pedido será entregado en un plazo máximo de 10 días laborables en la dirección especificada."
+                android:layout_marginBottom="8dp"/>
+
+            <TextView
+                android:id="@+id/textContacto"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Contacto"
+                android:textSize="22sp"
+                android:textStyle="bold"
+                android:layout_marginTop="16dp"
+                android:layout_marginBottom="4dp"/>
+
+            <TextView
+                android:id="@+id/textTContacto"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="¿Tu duda sigue sin resolverse? Contáctanos"
+                android:textStyle="bold"
+                android:layout_marginBottom="8dp"/>
+
+            <TextView
+                android:id="@+id/textTelefono"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Teléfono: +34 981 777 806"
+                android:layout_marginBottom="4dp"/>
+
+            <TextView
+                android:id="@+id/textEmail"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Email: contacto@doggyworld.com"
+                android:layout_marginBottom="4dp"/>
+
+            <TextView
+                android:id="@+id/textDireccion"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Dirección: Gran Vía, 247 1ºD Madrid, España"
+                android:layout_marginBottom="4dp"/>
+        </LinearLayout>
+    </ScrollView>
+</LinearLayout>
