@@ -52,8 +52,8 @@ public class ProfileActivity extends AppCompatActivity {
         btnPedidos.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                //Intent intent = new Intent(ProfileActivity.this, PedidosActivity.class);
-                //startActivity(intent);
+                Intent intent = new Intent(ProfileActivity.this, PedidosActivity.class);
+                startActivity(intent);
             }
         });
 
