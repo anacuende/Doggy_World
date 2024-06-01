@@ -47,7 +47,7 @@
                 android:id="@+id/question1"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="¿Cómo realizo un pedido?"
+                android:text="¿Hay envíos internacionales?"
                 android:textSize="18sp"
                 android:textStyle="italic"
                 android:layout_marginBottom="4dp"/>
@@ -56,14 +56,14 @@
                 android:id="@+id/answer1"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Para realizar un pedido, simplemente añade los productos a tu carrito y rellena los campos requeridos con tus datos para completar el proceso de compra."
+                android:text="Sí, enviamos a cualquier parte del mundo. El plazo máximo de entrega para los pedidos fuera de España es de 30 días naturales."
                 android:layout_marginBottom="8dp"/>
 
             <TextView
                 android:id="@+id/question2"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="¿Puedo cancelar un pedido?"
+                android:text="¿Cómo realizo un pedido?"
                 android:textSize="18sp"
                 android:textStyle="italic"
                 android:layout_marginBottom="4dp"/>
@@ -72,11 +72,27 @@
                 android:id="@+id/answer2"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Sí, tan solo tienes que acceder a tu perfil y seleccionar la opción Pedidos. Busca el pedido que deseas cancelar y selecciona la opción Cancelar."
+                android:text="Para realizar un pedido, simplemente añade los productos a tu carrito y rellena los campos requeridos con tus datos para completar el proceso de compra."
                 android:layout_marginBottom="8dp"/>
 
             <TextView
                 android:id="@+id/question3"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="¿Puedo cancelar un pedido?"
+                android:textSize="18sp"
+                android:textStyle="italic"
+                android:layout_marginBottom="4dp"/>
+
+            <TextView
+                android:id="@+id/answer3"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Sí, tan solo tienes que acceder a tu perfil y seleccionar la opción Pedidos. Busca el pedido que deseas cancelar y selecciona la opción Cancelar."
+                android:layout_marginBottom="8dp"/>
+
+            <TextView
+                android:id="@+id/question4"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="¿Cuanto tarda en llegar mi pedido?"
@@ -85,7 +101,7 @@
                 android:layout_marginBottom="4dp"/>
 
             <TextView
-                android:id="@+id/answer3"
+                android:id="@+id/answer4"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Una ver realizado con éxito el pedido será entregado en un plazo máximo de 10 días laborables en la dirección especificada."
