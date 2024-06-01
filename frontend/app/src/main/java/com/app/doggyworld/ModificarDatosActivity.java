@@ -47,7 +47,17 @@ public class ModificarDatosActivity extends AppCompatActivity {
         btnGuardarCambios.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                actualizarDatosUsuario();
+                if (textEmail.getText().toString().trim().contains("@")) {
+                    if (textContrasena.getText().toString().trim().equals(textRContrasena.getText().toString().trim())) {
+                        actualizarDatosUsuario();
+                    }
+                    else {
+                        Toast.makeText(ModificarDatosActivity.this, "Contrasñas no coinciden", Toast.LENGTH_SHORT).show();
+                    }
+                }
+                else  {
+                    Toast.makeText(ModificarDatosActivity.this, "Email no valido", Toast.LENGTH_SHORT).show();
+                }
             }
         });
     }
@@ -110,8 +120,13 @@ public class ModificarDatosActivity extends AppCompatActivity {
             body.put("name", textNombre.getText().toString().trim());
             body.put("username", textNombreUsuario.getText().toString().trim());
             body.put("email", textEmail.getText().toString().trim());
-            body.put("password", textContrasena.getText().toString().trim());
             body.put("confirmPassword", textRContrasena.getText().toString().trim());
+            if (!textContrasena.getText().toString().trim().isEmpty() ) {
+                body.put("password", textContrasena.getText().toString().trim());
+            }
+            if (!textContrasena.getText().toString().trim().isEmpty() ) {
+                body.put("confirmPassword", textContrasena.getText().toString().trim());
+            }
         } catch (JSONException e) {
             throw new RuntimeException(e);
         }
