@@ -53,14 +53,14 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 // Navegar a la actividad del perfil
-                //Intent intent = new Intent(MainActivity.this, ProfileActivity.class);
-                //startActivity(intent);
+                Intent intent = new Intent(MainActivity.this, ProfileActivity.class);
+                startActivity(intent);
             }
         });
 
         // Configuración del MeowBottomNavigation
         seleccionarCategoria();
-        categoriaActivity.loadProducts("random=3");
+        categoriaActivity.loadProducts("random=4");
     }
 
     private void seleccionarCategoria() {

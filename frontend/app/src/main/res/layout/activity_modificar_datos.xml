@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="16dp"
+    tools:context=".ModificarDatosActivity">
+
+    <ImageView
+        android:id="@+id/headerImage"
+        android:layout_width="280dp"
+        android:layout_height="75dp"
+        android:layout_gravity="center"
+        android:scaleType="centerCrop"
+        android:src="@drawable/banner_doggy_world"/>
+
+    <TextView
+        android:id="@+id/textPerfilUsuario"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Modificar mis datos"
+        android:textSize="18sp"
+        android:layout_gravity="center"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Nombre"
+        android:textSize="16sp"/>
+
+    <EditText
+        android:id="@+id/textNombre"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Nombre"
+        android:inputType="textPersonName"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Nombre de usuario"
+        android:textSize="16sp"/>
+
+    <EditText
+        android:id="@+id/textNombreUsuario"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Nombre de usuario"
+        android:inputType="textPersonName"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Correo electrónico"
+        android:textSize="16sp"/>
+
+    <EditText
+        android:id="@+id/textEmail"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Correo electrónico"
+        android:inputType="textEmailAddress"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Contraseña nueva"
+        android:textSize="16sp"/>
+
+    <EditText
+        android:id="@+id/textContrasena"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Contraseña nueva"
+        android:inputType="textPassword"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Repetir contraseña"
+        android:textSize="16sp"/>
+
+    <EditText
+        android:id="@+id/textRContrasena"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Repetir contraseña"
+        android:inputType="textPassword"/>
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/btnGuardarCambios"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Guardar Cambios"
+        android:background="@drawable/button_fill_shape"
+        android:textColor="@color/white"
+        android:layout_marginTop="8dp"/>
+</LinearLayout>

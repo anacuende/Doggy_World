@@ -13,6 +13,12 @@
         android:theme="@style/Theme.DoggyWorld"
         android:usesCleartextTraffic="true">
         <activity
+            android:name=".ModificarDatosActivity"
+            android:exported="false" />
+        <activity
+            android:name=".ProfileActivity"
+            android:exported="false" />
+        <activity
             android:name=".CartActivity"
             android:exported="false" />
         <activity
