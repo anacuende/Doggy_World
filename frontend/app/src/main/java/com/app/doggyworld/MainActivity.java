@@ -4,6 +4,8 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageButton;
+import android.widget.ImageView;
+import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.RecyclerView;
@@ -15,30 +17,22 @@ public class MainActivity extends AppCompatActivity {
 
     private MeowBottomNavigation bottomNavigation;
     private CategoriaActivity categoriaActivity;
-    private ImageButton firstButton, cartButton, profileButton;
+    private ImageButton cartButton, profileButton;
+    private TextView titulo;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        // Vínculo de los nuevos botones de la cabecera
-        firstButton = findViewById(R.id.firstButton);
         cartButton = findViewById(R.id.cartButton);
         profileButton = findViewById(R.id.profileButton);
+        titulo = findViewById(R.id.titulo);
 
         RecyclerView recyclerView = findViewById(R.id.recyclerView);
         categoriaActivity = new CategoriaActivity(this, recyclerView);
 
         bottomNavigation = findViewById(R.id.bottomNavigation);
-
-        // Configuración de los clics de los botones de la cabecera
-        firstButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                categoriaActivity.loadProducts("random=3");
-            }
-        });
 
         cartButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -77,18 +71,23 @@ public class MainActivity extends AppCompatActivity {
                 switch (model.getId()) {
                     case 0:
                         categoriaActivity.loadProducts("category=1");
+                        titulo.setText("Alimentación");
                         break;
                     case 1:
                         categoriaActivity.loadProducts("category=2");
+                        titulo.setText("Juguetes");
                         break;
                     case 2:
                         categoriaActivity.loadProducts("category=3");
+                        titulo.setText("Paseo");
                         break;
                     case 3:
                         categoriaActivity.loadProducts("category=4");
+                        titulo.setText("Higiene");
                         break;
                     case 4:
                         categoriaActivity.loadProducts("category=5");
+                        titulo.setText("Hogar");
                         break;
                 }
                 return null;

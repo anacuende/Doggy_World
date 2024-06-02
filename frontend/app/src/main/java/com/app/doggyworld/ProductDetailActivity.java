@@ -34,7 +34,7 @@ public class ProductDetailActivity extends AppCompatActivity {
     private Intent intent;
     private ImageView productImage;
     private TextView productName, productPrice, productDescription;
-    private ImageButton addToCartButton, addToWishlistButton, removeFromWishlistButton;
+    private ImageButton addToCartButton, addToWishlistButton;
     private int productId;
     private SharedPreferences sharedPreferences;
 
@@ -50,7 +50,6 @@ public class ProductDetailActivity extends AppCompatActivity {
         productDescription = findViewById(R.id.productDescription);
         addToCartButton = findViewById(R.id.addToCartButton);
         addToWishlistButton = findViewById(R.id.addToWishlistButton);
-        removeFromWishlistButton = findViewById(R.id.removeFromWishlistButton);
         sharedPreferences = getSharedPreferences("DoggyWorldPrefs", Context.MODE_PRIVATE);
 
         productId = getIntent().getIntExtra("productId", -1);
@@ -66,13 +65,6 @@ public class ProductDetailActivity extends AppCompatActivity {
         });
 
         addToWishlistButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-            }
-        });
-
-        removeFromWishlistButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 

@@ -60,8 +60,8 @@ public class ProfileActivity extends AppCompatActivity {
         btnListaDeseos.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                //Intent intent = new Intent(ProfileActivity.this, WhislistActivity.class);
-                //startActivity(intent);
+                Intent intent = new Intent(ProfileActivity.this, WhislistActivity.class);
+                startActivity(intent);
             }
         });
 

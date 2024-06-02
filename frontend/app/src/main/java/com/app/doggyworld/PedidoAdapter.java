@@ -52,9 +52,7 @@ public class PedidoAdapter extends RecyclerView.Adapter<PedidoAdapter.PedidoView
         holder.cancelButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                cancelarPedido(pedido.getId());
-                pedidoList.remove(position);
-                notifyItemRemoved(position);
+                cancelarPedido(pedido.getId(), position);
             }
         });
     }
@@ -75,7 +73,7 @@ public class PedidoAdapter extends RecyclerView.Adapter<PedidoAdapter.PedidoView
         }
     }
 
-    private void cancelarPedido(int pedidoId) {
+    private void cancelarPedido(int pedidoId, int position) {
         String url = "http://10.0.2.2:8000/api/doggyWorld/pedidos?pedidoId=" + pedidoId;
 
         JsonObjectRequest request = new JsonObjectRequest(
@@ -86,6 +84,8 @@ public class PedidoAdapter extends RecyclerView.Adapter<PedidoAdapter.PedidoView
                     @Override
                     public void onResponse(JSONObject response) {
                         Toast.makeText(context, "Pedido cancelado correctamente", Toast.LENGTH_SHORT).show();
+                        pedidoList.remove(position);
+                        notifyItemRemoved(position);
                     }
                 },
                 new Response.ErrorListener() {
