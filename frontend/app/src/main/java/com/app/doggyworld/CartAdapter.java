@@ -79,7 +79,7 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.ViewHolder> {
         String url = "http://10.0.2.2:8000/api/doggyWorld/cart?productId=" + id;
 
         JsonObjectRequest request = new JsonObjectRequest(
-                Request.Method.POST,
+                Request.Method.DELETE,
                 url,
                 null,
                 new Response.Listener<JSONObject>() {

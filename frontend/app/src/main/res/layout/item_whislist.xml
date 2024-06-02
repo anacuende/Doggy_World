@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:padding="16dp">
+
+    <ImageView
+        android:id="@+id/productImagen"
+        android:layout_width="65dp"
+        android:layout_height="65dp"
+        android:layout_alignParentStart="true"
+        android:layout_centerVertical="true"/>
+
+    <TextView
+        android:id="@+id/productNombre"
+        android:layout_width="50dp"
+        android:layout_height="wrap_content"
+        android:layout_toEndOf="@id/productImagen"
+        android:layout_toStartOf="@id/addToCartButton"
+        android:layout_marginStart="16dp"
+        android:text="Nombre del producto"
+        android:textSize="18sp"
+        android:textStyle="bold"/>
+
+    <TextView
+        android:id="@+id/productPrecio"
+        android:layout_width="50dp"
+        android:layout_height="wrap_content"
+        android:layout_toEndOf="@id/productImagen"
+        android:layout_toStartOf="@id/addToCartButton"
+        android:layout_marginStart="16dp"
+        android:layout_below="@id/productNombre"
+        android:text="Precio del producto"/>
+
+    <ImageButton
+        android:id="@+id/addToCartButton"
+        android:layout_width="60dp"
+        android:layout_height="30dp"
+        android:src="@drawable/shopping_cart"
+        android:background="@drawable/button_fill_shape"
+        android:layout_alignParentEnd="true"
+        android:layout_alignTop="@id/productNombre"/>
+
+    <ImageButton
+        android:id="@+id/removeFromWishlistButton"
+        android:layout_width="60dp"
+        android:layout_height="30dp"
+        android:src="@drawable/delete_wishlist"
+        android:background="@drawable/button_fill_red_shape"
+        android:layout_alignParentEnd="true"
+        android:layout_below="@id/addToCartButton"
+        android:layout_marginTop="8dp"/>
+
+</RelativeLayout>

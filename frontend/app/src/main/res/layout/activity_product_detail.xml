@@ -65,6 +65,8 @@
             android:layout_weight="1"
             android:src="@drawable/shopping_cart"
             android:background="@drawable/button_fill_shape"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"
             tools:ignore="ContentDescription" />
 
         <ImageButton
@@ -74,15 +76,7 @@
             android:layout_weight="1"
             android:src="@drawable/add_wishlist"
             android:background="@drawable/button_transparent_shape"
+            android:layout_marginRight="20dp"
             tools:ignore="ContentDescription"/>
-
-        <ImageButton
-            android:id="@+id/removeFromWishlistButton"
-            android:layout_width="0dp"
-            android:layout_height="30dp"
-            android:layout_weight="1"
-            android:src="@drawable/delete_wishlist"
-            android:background="@drawable/button_fill_red_shape"
-            tools:ignore="ContentDescription" />
     </LinearLayout>
 </RelativeLayout>
