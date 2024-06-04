@@ -86,7 +86,7 @@ public class WhislistActivity extends AppCompatActivity {
                         // Manejar el error de la solicitud HTTP
                         if (error.networkResponse == null) {
                             // Si no hay respuesta del servidor, muestra un mensaje de error interno
-                            Toast.makeText(context, "Internal Server Error", Toast.LENGTH_SHORT).show();
+                            // Toast.makeText(context, "Internal Server Error", Toast.LENGTH_SHORT).show();
                         } else {
                             // Si hay una respuesta del servidor, obtener el código de estado y el mensaje de error
                             int statusCode = error.networkResponse.statusCode;
