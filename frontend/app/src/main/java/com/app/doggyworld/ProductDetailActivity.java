@@ -66,9 +66,7 @@ public class ProductDetailActivity extends AppCompatActivity {
 
         addToWishlistButton.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View v) {
-
-            }
+            public void onClick(View v) {addProductToWishlist();}
         });
     }
 
@@ -152,6 +150,60 @@ public class ProductDetailActivity extends AppCompatActivity {
                     @Override
                     public void onResponse(JSONObject response) {
                         Toast.makeText(ProductDetailActivity.this, "Producto agregado al carrito de compras correctamente", Toast.LENGTH_SHORT).show();
+                    }
+                },
+                new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        // Maneja el error de la solicitud HTTP
+                        if (error.networkResponse == null) {
+                            // Si no hay respuesta del servidor, muestra un mensaje de error interno
+                            Toast.makeText(ProductDetailActivity.this, "Internal Server Error", Toast.LENGTH_SHORT).show();
+                        } else {
+                            // Si hay una respuesta del servidor, obtener el código de estado y el mensaje de error
+                            int statusCode = error.networkResponse.statusCode;
+                            String errorMessage = new String(error.networkResponse.data);
+                            // Muestra el mensaje de error en un Toast
+                            Toast.makeText(ProductDetailActivity.this, "Error " + statusCode + ": " + errorMessage, Toast.LENGTH_LONG).show();
+                        }
+                    }
+                }
+        ) {
+            @Override
+            public Map<String, String> getHeaders() {
+                // Adjuntar el token de usuario a los encabezados de la solicitud
+                Map<String, String> headers = new HashMap<>();
+                headers.put("token", token);
+                return headers;
+            }
+        };
+
+        // Agrega la solicitud a la cola de solicitudes de Volley
+        RequestQueue requestQueue = Volley.newRequestQueue(this);
+        requestQueue.add(request);
+    }
+
+    private void addProductToWishlist() {
+        String url = "http://10.0.2.2:8000/api/doggyWorld/wishlist";
+
+        // Obtener el token de SharedPreferences
+        String token = sharedPreferences.getString("token", null);
+
+        JSONObject body = new JSONObject();
+        try {
+            body.put("producto_id", intent.getIntExtra("productId", 0));
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
+
+        JsonObjectRequest request = new JsonObjectRequest(
+                Request.Method.POST,
+                url,
+                body,
+                new Response.Listener<JSONObject>() {
+                    @Override
+                    public void onResponse(JSONObject response) {
+                        Toast.makeText(ProductDetailActivity.this, "Producto agregado a la lista de deseos correctamente", Toast.LENGTH_SHORT).show();
                     }
                 },
                 new Response.ErrorListener() {
