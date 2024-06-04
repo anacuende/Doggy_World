@@ -3,13 +3,9 @@
   ![Logo](https://github.com/anacuende/Doggy_World/assets/113435331/bff389c4-20d7-4133-9853-281b6ffe9eb8)
 
   <p align="center">
-    <img src="https://img.shields.io/badge/STATUS-EN%20DESARROLLO-rgb(0,151,117)">
+    <img src="https://img.shields.io/badge/VERSION-1.0-rgb(0,151,117)">
   </p>
 </h1>
-
-<h1 align="center">:construction: EN CONSTRUCCIÓN :construction:</h1>
-
-Este proyecto se encuentra actualmente en construcción. A lo largo de las próximas semanas se continuará con su desarrollo.
 
 ## :round_pushpin: Índice
 * ¿Qué es Doggy World?
@@ -32,7 +28,7 @@ Muchas veces la búsqueda de ciertos productos para nuestro mejor amigo se hace 
 
 :heavy_check_mark: Cuentas de usuario: todos los usuarios que deseen usar la aplicación deberán crearse una cuenta e iniciar sesión para usarla. En ella podrán personalizar sus datos siempre que deseen.
 
-:heavy_check_mark: Categorías: existe un menú de navegación en la parte inferior de la pantalla mediante el cualse podrá acceder a las diferentes categorías de productos. Se puede interactuar con todos los productos para verlos en detalle y añadirlos al carrito o a la lista de deseos a petición del usuario.
+:heavy_check_mark: Categorías: existe un menú de navegación en la parte inferior de la pantalla mediante el cual se podrá acceder a las diferentes categorías de productos. Se puede interactuar con todos los productos para verlos en detalle y añadirlos al carrito o a la lista de deseos a petición del usuario.
 
 :heavy_check_mark: Lista de deseos y carrito de compras: todos los usuarios podrán guardar productos en una lista de deseos para que los puedan consultar en cualquier momento. Por otro lado si se añade un producto en el carrito de compra éste se quedará guardado en él hasta que el mismo usuario lo elimine o realice el pedido. Tanto la lista de deseos como el carrito de la compra son privados, solo el usuario puede ver y modificar el contenido de los mismos.
 
